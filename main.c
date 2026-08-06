@@ -66,9 +66,9 @@ int main(void) {
 	// 2^30 = 1,073,741,824 doubles = 8,589,934,592 bytes = 8GB per vector = approx 48GB total
     
 	// 2^28 will require me to close all other programs and keep at least 12GB of RAM free
-	// 2^27 can technically be run on my 16GB RAM machine, but will likely cause slowdowns
-	// 2^26 comfotably runs on my 16GB RAM laptop
-    long long sizes[] = { 1LL << 20, 1LL << 24, 1LL << 26 };
+	// 2^27 is the most I would like to push my 16GB RAM laptop
+	// 2^26 would run comfotably on most modern machines
+    long long sizes[] = { 1LL << 20, 1LL << 24, 1LL << 27 };
     int num_sizes = 3;
     int runs = 30;
 
