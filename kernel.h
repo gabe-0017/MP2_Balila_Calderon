@@ -4,8 +4,21 @@
 extern "C" {
 #endif
 
-	void distance_kernel_c(const double* X1, const double* X2, const double* Y1, const double* Y2, double* Z, long long n);
-	void distance_kernel_asm(const double* X1, const double* X2, const double* Y1, const double* Y2, double* Z, long long n);
+    void distance_kernel_c(
+        const float* X1,
+        const float* X2,
+        const float* Y1,
+        const float* Y2,
+        float* Z,
+        long long n);
+
+    void distance_kernel_asm(
+        const float* X1,
+        const float* X2,
+        const float* Y1,
+        const float* Y2,
+        float* Z,
+        long long n);
 
 #ifdef __cplusplus
 }
