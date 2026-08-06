@@ -1,9 +1,11 @@
 # Euclidean Distance Kernel (C and x86-64 Assembly)
 
 **Course:** LBYARCH
+
 **Section:** S25G
-**Members:** 
-- Balila, Dale Vernard 
+
+**Members:**
+- Balila, Dale Vernard
 - Calderon, John Gabriel
 
 Implementation of a Euclidean distance kernel in (1) C using SSE2 scalar-double intrinsics and (2) x86-64 assembly (MASM) using scalar SSE2 instructions directly. Both versions compute:
