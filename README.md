@@ -1,9 +1,7 @@
 # Euclidean Distance Kernel (C and x86-64 Assembly)
 
 **Course:** LBYARCH
-
 **Section:** S25G
-
 **Members:** 
 - Balila, Dale Vernard 
 - Calderon, John Gabriel
