@@ -1,10 +1,10 @@
 # Euclidean Distance Kernel (C and x86-64 Assembly)
 
-**Course:** LBYARCH
+Course: LBYARCH
 
-**Section:** S25G
+Section: S25G
 
-**Members:**
+Members:
 - Balila, Dale Vernard
 - Calderon, John Gabriel
 
@@ -30,37 +30,6 @@ Both kernel versions use **functional scalar SIMD registers and scalar SIMD floa
 
 - **C version:** SSE2 intrinsics operating on the `_sd` ("scalar double") lane of XMM registers — this guarantees the compiler emits real scalar SSE2 instructions rather than legacy x87 code or auto-vectorized packed instructions.
 - **Assembly version:** hand-written scalar SSE2 instructions (`movsd`, `subsd`, `mulsd`, `addsd`, `sqrtsd`) operating one double at a time on XMM registers, following the Windows x64 calling convention.
-
----
-
-## How to Build and Run
-
-### Option 1 — Visual Studio
-1. Open `MP2_Balila_Calderon.slnx`
-2. Set configuration to **Release**, platform to **x64**
-3. Build (Ctrl+Shift+B), then Run (Ctrl+F5)
-
-### Option 2 — Command line
-1. Initialize the Visual Studio environment
-```cmd
-"<insert the path to your vcvarsall.bat file>" x64
-```
-Sample:
-```bash
-"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
-```
-2. Assemble the asm file
-```cmd
-ml64 /c /Fo kernel_asm.obj kernel_asm.asm
-```
-3. Compile the C files & link everything to `MP2.exe`
-```cmd
-cl /O2 /Fe:MP2.exe main.c kernel_c.c kernel_asm.obj
-```
-4. Run `MP2.exe`
-```cmd
-MP2.exe
-```
 
 ---
 
@@ -104,6 +73,37 @@ At the largest size (2^27), a more interesting pattern emerged across repeated r
 This is most plausibly explained by **memory-subsystem effects rather than instruction-level performance differences**. At 2^27, each of the six allocated vectors is roughly 1GB, and a freshly-started process must fault in physical pages for newly allocated memory as it's first touched. Immediately after a period where the system's memory was under more pressure (e.g. right after another large run, or other background activity), the OS is more likely to need to reclaim or zero physical frames on demand — an expensive path. Once the system's page cache and physical frame allocator "settle," subsequent process runs pay less of this penalty. The C kernel appears to be disproportionately affected by this compared to the assembly kernel — a plausible explanation is that the intrinsics-based loop, even under `/O2`, retains a few more instructions per iteration (register shuffling the compiler didn't fully eliminate) than the hand-written assembly, making it slightly more exposed to memory-subsystem latency when the system hasn't yet stabilized.
 
 **Conclusion:** for this workload, hand-written scalar SSE2 assembly does not provide a consistent, reproducible performance advantage over compiler-generated code from SSE2 intrinsics once the system reaches steady state. The one scenario where assembly showed a clear, repeated advantage (~2.3x+) was under cold-start memory conditions at the largest tested size — suggesting the benefit observed there is more attributable to the assembly kernel's smaller instruction footprint being less sensitive to memory-subsystem overhead, rather than to raw compute throughput.
+
+---
+
+## How to Build and Run
+
+### Option 1 — Visual Studio
+1. Open `MP2_Balila_Calderon.slnx`
+2. Set configuration to **Release**, platform to **x64**
+3. Build (Ctrl+Shift+B), then Run (Ctrl+F5)
+
+### Option 2 — Command line
+1. Initialize the Visual Studio environment
+```cmd
+"<insert the path to your vcvarsall.bat file>" x64
+```
+Sample:
+```bash
+"C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
+```
+2. Assemble the asm file
+```cmd
+ml64 /c /Fo kernel_asm.obj kernel_asm.asm
+```
+3. Compile the C files & link everything to `MP2.exe`
+```cmd
+cl /O2 /Fe:MP2.exe main.c kernel_c.c kernel_asm.obj
+```
+4. Run `MP2.exe`
+```cmd
+MP2.exe
+```
 
 ---
 
