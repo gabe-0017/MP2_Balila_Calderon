@@ -1,7 +1,9 @@
-# MP2 — Euclidean Distance Kernel (C and x86-64 Assembly)
+# Euclidean Distance Kernel (C and x86-64 Assembly)
 
 **Course:** LBYARCH
-**Seaction:** S25G
+
+**Section:** S25G
+
 **Members:** 
 - Balila, Dale Vernard 
 - Calderon, John Gabriel
@@ -33,13 +35,13 @@ Both kernel versions use **functional scalar SIMD registers and scalar SIMD floa
 
 ## How to Build and Run
 
-### Option A — Visual Studio 2026
+### Option 1 — Visual Studio
 1. Open `MP2_Balila_Calderon.slnx`
 2. Set configuration to **Release**, platform to **x64**
 3. Build (Ctrl+Shift+B), then Run (Ctrl+F5)
 
-### Option B — Command line (no IDE required)
-**1. Initialize the Visual Studio environment**
+### Option 2 — Command line
+1. Initialize the Visual Studio environment
 ```cmd
 "<insert the path to your vcvarsall.bat file>" x64
 ```
@@ -47,15 +49,15 @@ Sample:
 ```bash
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 ```
-**2. Assemble the asm file**
+2. Assemble the asm file
 ```cmd
 ml64 /c /Fo kernel_asm.obj kernel_asm.asm
 ```
-**3. Compile the C files & link everything to `MP2.exe`**
+3. Compile the C files & link everything to `MP2.exe`
 ```cmd
 cl /O2 /Fe:MP2.exe main.c kernel_c.c kernel_asm.obj
 ```
-**Run `MP2.exe`**
+4. Run `MP2.exe`
 ```cmd
 MP2.exe
 ```
@@ -87,12 +89,9 @@ Average of 30 runs per size, Release build (`/O2`):
 
 | n | C Kernel (avg) | ASM Kernel (avg) | Speedup (C/ASM) |
 |---|---|---|---|
-| 2^20 (1,048,576) | ~0.0025 sec | ~0.0024 sec | ~1.0x |
-| 2^24 (16,777,216) | ~0.038 sec | ~0.038 sec | ~1.0x |
-| 2^27 (134,217,728) — steady-state | ~0.32–0.36 sec | ~0.31–0.33 sec | ~0.96–1.16x |
-| 2^27 (134,217,728) — cold-start | ~0.82–0.86 sec | ~0.35 sec | ~2.3–2.45x |
-
-*(Replace the above with your final exact numbers from the screenshots/video — table above reflects the range observed across 4 runs, see analysis below.)*
+| 2^20 (1,048,576) | 0.002476 sec | 0.002546 sec | 0.972x |
+| 2^24 (16,777,216) | 0.036163 sec | 0.037063 sec | 0.976x |
+| 2^27 (134,217,728) | 0.316193 sec | 0.328660 sec | 0.962x |
 
 ---
 
