@@ -1,12 +1,12 @@
 # Euclidean Distance Kernel (C and x86-64 Assembly)
 
-Course: LBYARCH
+**Course:** *LBYARCH*
 
-Section: S25G
+**Section:** *S25G*
 
-Members:
-- Balila, Dale Vernard
-- Calderon, John Gabriel
+**Members:**
+- *Balila, Dale Vernard*
+- *Calderon, John Gabriel*
 
 Implementation of a Euclidean distance kernel in (1) C using SSE2 scalar-double intrinsics and (2) x86-64 assembly (MASM) using scalar SSE2 instructions directly. Both versions compute:
 
@@ -88,10 +88,10 @@ This is most plausibly explained by **memory-subsystem effects rather than instr
 ```cmd
 "<insert the path to your vcvarsall.bat file>" x64
 ```
-Sample:
 ```bash
 "C:\Program Files\Microsoft Visual Studio\18\Community\VC\Auxiliary\Build\vcvarsall.bat" x64
 ```
+> sample path above
 2. Assemble the asm file
 ```cmd
 ml64 /c /Fo kernel_asm.obj kernel_asm.asm
