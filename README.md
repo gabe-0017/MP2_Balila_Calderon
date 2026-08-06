@@ -111,4 +111,4 @@ MP2.exe
  
 Both kernels are compiled and executed together in a single run of `MP2.exe`, so one video covers source code, compilation, and execution for both the C and x86-64 versions:
  
-- Demo video: <insert link later>
+- Demo video: https://youtu.be/gq6RAYBdLoY
