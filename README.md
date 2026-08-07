@@ -45,3 +45,12 @@ All three test sizes passed the correctness check:
 2^20: PASSED
 2^24: PASSED
 2^27: PASSED
+```
+
+## Screenshot of the program output with the correctness check of both C and ASM
+
+<img width="1757" height="601" alt="output_c-and-asm" src="https://github.com/user-attachments/assets/4b3244f7-5462-4ad5-9b60-8087e9c6f85e" />
+
+## Video Link
+
+YouTube Link: https://www.youtube.com/watch?v=994Zh0Q1ye4
